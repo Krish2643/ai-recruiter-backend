@@ -9,6 +9,9 @@ import { notFound, errorHandler } from './middleware/error.js';
 import authRoutes from './routes/auth.routes.js';
 import userRoutes from './routes/user.routes.js';
 import applicationRoutes from './routes/application.routes.js';
+import documentRoutes from './routes/document.routes.js';
+import dashboardRoutes from './routes/dashboard.routes.js';
+import progressRoutes from './routes/progress.routes.js';
 import aiRoutes from './routes/ai.routes.js'; 
 import adminRoutes from './routes/admin.routes.js';
 
@@ -26,8 +29,11 @@ app.get('/v1/health', (req, res) => res.json({ ok: true, ts: new Date() }));
 // Routes
 app.use('/v1/auth', authRoutes);
 app.use('/v1/users', userRoutes);
-app.use('/v1/applications', applicationRoutes);
-app.use('/v1/ai', aiRoutes);
+app.use('/v1/job-applications', applicationRoutes);
+app.use('/v1/documents', documentRoutes);
+app.use('/v1/dashboard', dashboardRoutes);
+app.use('/v1/progress', progressRoutes);
+app.use('/v1/ai-assistant', aiRoutes);
 app.use('/v1/admin', adminRoutes);
 
 // 404 + Error

@@ -1,5 +1,6 @@
 import User from '../models/User.js';
 import { signJWT } from '../utils/crypto.js';
+import { ok } from '../utils/responses.js';
 
 export async function register(req, res) {
   const { name, email, password } = req.body;
@@ -31,4 +32,16 @@ export async function login(req, res) {
 
   const token = signJWT(user);
   return res.json({ success: true, data: { token, user: { id: user.id, name: user.name, role: user.role } } });
+}
+
+export async function getCurrentUser(req, res) {
+  const user = await User.findById(req.user.id);
+  if (!user) return res.status(404).json({ success: false, message: 'User not found' });
+  
+  return ok(res, {
+    id: user.id,
+    name: user.name,
+    email: user.email,
+    role: user.role
+  });
 }

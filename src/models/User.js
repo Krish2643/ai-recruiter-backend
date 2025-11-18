@@ -8,7 +8,13 @@ const userSchema = new mongoose.Schema(
     password: { type: String, required: true, minlength: 8, select: false },
     role: { type: String, enum: ['candidate', 'admin'], default: 'candidate' },
     status: { type: String, enum: ['active', 'inactive'], default: 'active' },
-    lastLogin: { type: Date }
+    lastLogin: { type: Date },
+    username: { type: String, unique: true, sparse: true, maxlength: 50 },
+    first_name: { type: String, maxlength: 50 },
+    last_name: { type: String, maxlength: 50 },
+    phone: { type: String, maxlength: 20 },
+    language: { type: String, maxlength: 10, default: 'en' },
+    pic: { type: String, maxlength: 500 }
   },
   { timestamps: true }
 );
